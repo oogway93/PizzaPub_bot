@@ -4,7 +4,6 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 from aiogram.dispatcher.filters import Command
 import db
 
-
 from config import TOKEN
 import keyboards
 
@@ -41,6 +40,15 @@ async def work_schedule_handler(message: types.Message):
 @dp.message_handler(commands=['Menu'])
 async def menu_handler(message: types.Message):
     await db.sql_read(message)
+
+
+@dp.callback_query_handler()
+async def callback_feedback_pizza(callback: types.CallbackQuery):
+    if callback.data == 'Like':
+        await callback.answer("Спасибо за ваш хороший отзыв❤️")
+    elif callback.data == 'Dislike':
+        await callback.answer("Сожалеем, что не оправдали ваших ожиданий.😢 Закажите что-нибудь другое")
+
 
 if __name__ == '__main__':
     executor.start_polling(dp, on_startup=on_startup, skip_updates=True)
