@@ -15,6 +15,7 @@ cryptography==41.0.2
 distlib==0.3.7
 dulwich==0.21.5
 filelock==3.12.2
+flake8==6.1.0
 frozenlist==1.4.0
 html5lib==1.1
 idna==3.4
@@ -26,6 +27,7 @@ jsonschema==4.17.3
 keyring==23.13.1
 lockfile==0.12.2
 magic-filter==1.0.11
+mccabe==0.7.0
 more-itertools==9.1.0
 msgpack==1.0.5
 multidict==6.0.4
@@ -38,7 +40,9 @@ poetry==1.5.1
 poetry-core==1.6.1
 poetry-plugin-export==1.4.0
 ptyprocess==0.7.0
+pycodestyle==2.11.0
 pycparser==2.21
+pyflakes==3.1.0
 pyproject_hooks==1.0.0
 pyrsistent==0.19.3
 python-dotenv==1.0.0
