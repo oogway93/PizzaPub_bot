@@ -1,7 +1,5 @@
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.dispatcher.filters import Command
 import db
 
 from config import TOKEN
@@ -30,16 +28,19 @@ async def start_handler(message: types.Message):
 @dp.message_handler(commands=['Location'])
 async def situation_handler(message: types.Message):
     await bot.send_message(message.from_user.id, text=rest, parse_mode="HTML")
+    await message.delete()
 
 
 @dp.message_handler(commands=['Schedule'])
 async def work_schedule_handler(message: types.Message):
     await bot.send_message(message.from_user.id, text="Вс-Чт с 9:00 до 20:00, Пт-Сб с 10:00 до 23:00")
+    await message.delete()
 
 
 @dp.message_handler(commands=['Menu'])
 async def menu_handler(message: types.Message):
     await db.sql_read(message)
+    await message.delete()
 
 
 @dp.callback_query_handler()
@@ -51,4 +52,5 @@ async def callback_feedback_pizza(callback: types.CallbackQuery):
 
 
 if __name__ == '__main__':
+    db.sql_start_db()
     executor.start_polling(dp, on_startup=on_startup, skip_updates=True)
