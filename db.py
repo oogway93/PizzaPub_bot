@@ -1,5 +1,6 @@
 import sqlite3 as sq
 
+from pizza_data import images, names, descriptions, prices
 from keyboards import keyboards
 import main
 
@@ -10,9 +11,16 @@ cur = base.cursor()
 def sql_start_db():
     if base:
         print("DB was started(created)")
+
     base.execute('CREATE TABLE IF NOT EXISTS menu(img TEXT, name TEXT PRIMARY KEY, description TEXT, price TEXT)')
     base.commit()
 
+    all_data = base.execute('SELECT * FROM menu')
+    if len(all_data.fetchall()) == 0:
+        for i in range(5):
+            cur.execute(f'INSERT INTO menu VALUES ("{images[i]}", "{names[i]}", "{descriptions[i]}", "{prices[i]}")')
+            base.commit()
+            print(f"Data_{i + 1} in db")
 
 # Do this code in a python console
 # from pizza_data import images, names, descriptions, prices
