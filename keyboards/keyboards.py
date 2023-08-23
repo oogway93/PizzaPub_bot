@@ -1,5 +1,4 @@
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.dispatcher.filters import Command
 
 kb = ReplyKeyboardMarkup(resize_keyboard=True)
 btn1 = KeyboardButton('/Schedule')
