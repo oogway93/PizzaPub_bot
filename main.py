@@ -1,22 +1,27 @@
-from aiogram import Bot, Dispatcher
-from aiogram.utils import executor
-import db
+import asyncio
 
+from aiogram import Bot, Dispatcher
+
+import db
 from config import TOKEN
-from handlers import handlers
+from handlers.handlers import router
 
 API_TOKEN = TOKEN
 
 bot = Bot(API_TOKEN, parse_mode="HTML")
-dp = Dispatcher(bot)
+dp = Dispatcher()
 
 
-async def on_startup(_):
+async def on_startup():
     print("Bot was started")
 
 
-handlers.register_handlers(dp)
+async def main():
+    dp.include_router(router)
+    await db.sql_start_db()
+    await bot.delete_webhook(drop_pending_updates=True)
+    await dp.start_polling(bot, on_startup=on_startup)
+
 
 if __name__ == '__main__':
-    db.sql_start_db()
-    executor.start_polling(dp, on_startup=on_startup, skip_updates=True)
+    asyncio.run(main())
