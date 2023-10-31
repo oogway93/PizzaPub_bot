@@ -1,20 +1,28 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-reply_btns = ReplyKeyboardMarkup(
+start_btns = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text='Schedule'),
-            KeyboardButton(text='Location'),
+            KeyboardButton(text='🗓 График работы'),
+            KeyboardButton(text='📜 Рестораны г. Ростов-на-Дону'),
         ],
         [
-            KeyboardButton(text='Menu')
+            KeyboardButton(text='🍕 Меню')
         ],
-        [
-            KeyboardButton(text='Поделиться номером', request_contact=True),
-            KeyboardButton(text='Отправить где я', request_location=True)
-        ]
     ],
     resize_keyboard=True,
     input_field_placeholder='Выберите действие ниже',
     selective=True,
+)
+
+contacts_btns = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text='📱 Поделиться номером', request_contact=True),
+            KeyboardButton(text='🧭 Отправить где я', request_location=True)
+        ],
+    ],
+    resize_keyboard=True,
+    input_field_placeholder='Поделитесь номером телефона для заказа',
+    selective=True
 )

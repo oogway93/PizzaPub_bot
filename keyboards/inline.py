@@ -5,6 +5,9 @@ inline_btns = InlineKeyboardMarkup(
         [
             InlineKeyboardButton(text='❤️', callback_data='Like'),
             InlineKeyboardButton(text='👎', callback_data='Dislike'),
-        ]
+        ],
+        [
+            InlineKeyboardButton(text='🛒 Добавить в корзину', callback_data='Cart')
+        ],
     ]
 )

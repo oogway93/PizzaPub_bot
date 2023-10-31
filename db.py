@@ -11,7 +11,8 @@ async def sql_start_db():
         if db:
             print("DB was started(created)")
         await db.execute(
-            'CREATE TABLE IF NOT EXISTS menu(img TEXT, name TEXT PRIMARY KEY, description TEXT, price TEXT);')
+            'CREATE TABLE IF NOT EXISTS menu(img TEXT, name TEXT PRIMARY KEY, description TEXT, price TEXT);'
+        )
         await db.commit()
         async with db.execute('SELECT * FROM menu;') as cursor:
             if len(await cursor.fetchall()) == 0:
